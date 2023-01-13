@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "eamodio.gitlens",
+    "alexkrechik.cucumberautocomplete",
+    "formulahendry.auto-rename-tag",
+    "steoates.autoimport",
+    "vivaxy.vscode-conventional-commits",
+    "wix.vscode-import-cost"
+  ]
+}

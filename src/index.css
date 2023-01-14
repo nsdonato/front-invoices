@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Prevent Layout Shift';
+  font-size: 14px;
+  line-height: 1.7;
+  visibility: visible;
+  font-weight: 700;
+  letter-spacing: 0.15px;
+  word-spacing: 1.05px;
+  src: local('Helvetica');
+}
+
+@font-face {
+  font-family: 'Spartan';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/spartan-medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Spartan';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/spartan-bold.woff2') format('woff2');
+}
+
+@layer base {
+  html {
+    font-family: 'Spartan', 'Prevent Layout Shift', system-ui, sans-serif;
+  }
+}

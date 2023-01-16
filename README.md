@@ -82,6 +82,11 @@ Si tienes cualquier duda puedes preguntar en nuestro [Discord](https://discord.i
   <img src="https://contrib.rocks/image?repo=nsdonato/front-invoices" />
 </a>
 
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
 ## Design System
 
 > Todos los colores y breakpoints utilizados en el proyecto! 🌈

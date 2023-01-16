@@ -63,15 +63,15 @@ module.exports = {
         ],
         sm: [
           '12px',
-          { lineHeight: '15px', fontWeight: '500', lineHeight: '-0.25px' },
+          { lineHeight: '15px', fontWeight: '500', letterSpacing: '-0.25px' },
         ],
         base: [
           '16px',
-          { lineHeight: '24px', fontWeight: '700', lineHeight: '-0.8px' },
+          { lineHeight: '24px', fontWeight: '700', letterSpacing: '-0.8px' },
         ],
         lg: [
           '20px',
-          { lineHeight: '22px', fontWeight: '500', lineHeight: '-0.63px' },
+          { lineHeight: '22px', fontWeight: '500', letterSpacing: '-0.63px' },
         ],
         xl: [
           '32px',

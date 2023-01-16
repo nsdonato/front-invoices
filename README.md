@@ -39,10 +39,6 @@ ya que debe respestarse.
 git clone https://github.com/nsdonato/front-invoices
 ```
 
-## Permisos para contribuir
-
-Debes estar en Discord y en el canal #🧾-invoice-app hilo "Usuarios GitHub" pedir que agreguemos tu usuario de GitHub al repositorio que quieras aportar, front o back.
-
 ## Extensiones
 
 En el proyecto hay extensiones recomendadas en el archivo .vscode/extensions.json (no tenes que hacer nada), puede salirte el cartel o directamente podes ir a la pestaña de extensiones y buscarlas poniendo: `@recommended`

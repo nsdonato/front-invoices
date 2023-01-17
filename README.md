@@ -82,7 +82,6 @@ Si tienes cualquier duda puedes preguntar en nuestro [Discord](https://discord.i
   <img src="https://contrib.rocks/image?repo=nsdonato/front-invoices" />
 </a>
 
-
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
@@ -102,7 +101,7 @@ Si tienes cualquier duda puedes preguntar en nuestro [Discord](https://discord.i
 
 | Token                       | Nombre                 | Descripción/Caso de uso                                                |
 | --------------------------- | ---------------------- | ---------------------------------------------------------------------- |
-| #FFFFFF                     | brand-white            | -                                                                      |
+| $\color{#FFFFFF}            | brand-white            | -                                                                      |
 | #7C5DFA                     | brand-violet           | Background del botón primario                                          |
 | #9277FF                     | brand-violet-light     | Background del botón primario en hover                                 |
 | #F9FAFE                     | brand-violet-ghost     | Background del botón secundario                                        |

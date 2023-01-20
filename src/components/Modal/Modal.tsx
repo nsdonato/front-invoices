@@ -29,7 +29,7 @@ function Modal({
         onClick={(e) => {
           e.stopPropagation();
         }}
-        className={`h-[250px] w-[90%] max-w-[480px] brand-lg:min-w-0 bg-white rounded-lg flex flex-col p-12  ${
+        className={`min-h-[250px] w-[90%] max-w-[480px] brand-lg:min-w-0 bg-white rounded-lg flex flex-col p-12  ${
           show ? "translate-y-0 " : "-translate-y-[250%] opacity-0"
         } transition-all duration-300 ease-in-out`}
       >

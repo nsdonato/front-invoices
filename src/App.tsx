@@ -1,11 +1,14 @@
+import { Outlet } from "react-router-dom";
+
 import Button from "./components/Button/Button";
 
 function App() {
   return (
     <div>
-      <h1 className="text-8xl font-bold underline decoration-sky-600 hover:decoration-blue-400">
-        Invoice App
-      </h1>
+      <>
+        <p>Welcome to Invoice App</p>
+        <Outlet />
+      </>
       <Button />
     </div>
   );

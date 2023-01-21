@@ -1,4 +1,47 @@
-const Button = () => {
+import { useState } from "react";
+
+interface Props {
+  variant?: string;
+  buttonLabel: string;
+  widthFull?: boolean;
+  children?: JSX.Element;
+}
+
+interface Variants {
+  primary: string;
+  secondary: string;
+  tertiary: string;
+  delete: string;
+}
+
+const variants: Variants = {
+  primary: "bg-brand-violet hover:bg-brand-violet-light text-brand-white",
+  secondary:
+    "bg-brand-violet-ghost hover:bg-brand-violet-highlight text-brand-violet-muted",
+  tertiary: "bg-brand-gray hover:bg-brand-text text-brand-text-muted",
+  delete: "bg-brand-red hover:bg-brand-red-light text-brand-white",
+};
+
+const Button = ({
+  variant = "primary",
+  buttonLabel,
+  widthFull,
+  children,
+}: Props) => {
+  const [isDesktop, setDesktop] = useState(window.innerWidth > 768);
+
+  window.addEventListener("resize", () => {
+    setDesktop(window.innerWidth > 768);
+  });
+
+  function renderLabel() {
+    if (isDesktop) {
+      return <span className="my-2 mx-4 pt-px">{buttonLabel}</span>;
+    } else {
+      return <span className="my-2 mx-2 pt-px">New</span>;
+    }
+  }
+
   const handleClick = () => {
     // event
   };
@@ -6,24 +49,16 @@ const Button = () => {
   return (
     <button
       onClick={handleClick}
-      className="bg-brand-violet hover:bg-brand-violet-light text-brand-white flex py-1.5 pl-1.5 pr-3.5 rounded-3xl md:py-2 md:pl-2 md:pr-4"
+      className={`text-sm rounded-3xl flex py-2 px-2 
+      ${variants[variant as keyof Variants]} 
+      ${widthFull ? "w-full justify-center" : ""}`}
     >
-      <svg
-        className="text-xl mr-2.5 md:mr-4"
-        width="32"
-        height="32"
-        viewBox="0 0 32 32"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <circle cx="16" cy="16" r="16" fill="white" />
-        <path
-          d="M17.3131 21.0229V17.3131H21.0229V14.7328H17.3131V11.0229H14.7328V14.7328H11.0229V17.3131H14.7328V21.0229H17.3131Z"
-          fill="#7C5DFA"
-        />
-      </svg>
-      <span className="text-sm py-2 md:hidden">New</span>
-      <span className="hidden md:block md:text-sm md:py-2">New Invoice</span>
+      {children}
+      {buttonLabel === "New Invoice" ? (
+        renderLabel()
+      ) : (
+        <span className="my-2 mx-4 pt-px">{buttonLabel}</span>
+      )}
     </button>
   );
 };

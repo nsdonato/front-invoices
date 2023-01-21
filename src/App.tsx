@@ -12,7 +12,12 @@ function App() {
       <div className="w-9/12 min-w-0 m-auto mt-8">
         <div className="grid grid-cols-2 gap-y-4 gap-x-2 justify-items-center">
           <div>
-            <Button buttonLabel="New Invoice">
+            <Button
+              buttonLabel="New Invoice"
+              onClick={() => {
+                console.log("New Invoice");
+              }}
+            >
               <svg
                 className="text-xl"
                 width="32"
@@ -30,22 +35,48 @@ function App() {
             </Button>
           </div>
           <div>
-            <Button buttonLabel="Mark as Paid" />
+            <Button
+              buttonLabel="Mark as Paid"
+              onClick={() => {
+                console.log("Mark as Paid");
+              }}
+            />
           </div>
           <div>
-            <Button variant="secondary" buttonLabel="Edit" />
+            <Button
+              variant="secondary"
+              buttonLabel="Edit"
+              onClick={() => {
+                console.log("Edit");
+              }}
+            />
           </div>
           <div>
-            <Button variant="tertiary" buttonLabel="Save as Draft" />
+            <Button
+              variant="tertiary"
+              buttonLabel="Save as Draft"
+              onClick={() => {
+                console.log("Save as Draft");
+              }}
+            />
           </div>
           <div>
-            <Button variant="delete" buttonLabel="Delete" />
+            <Button
+              variant="delete"
+              buttonLabel="Delete"
+              onClick={() => {
+                console.log("Delete");
+              }}
+            />
           </div>
           <div className="w-full">
             <Button
               variant="secondary"
               buttonLabel="+ Add New Item"
               widthFull
+              onClick={() => {
+                console.log("Add New Item");
+              }}
             />
           </div>
         </div>

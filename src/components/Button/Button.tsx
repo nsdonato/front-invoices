@@ -5,6 +5,7 @@ interface Props {
   buttonLabel: string;
   widthFull?: boolean;
   children?: JSX.Element;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 interface Variants {
@@ -27,6 +28,7 @@ const Button = ({
   buttonLabel,
   widthFull,
   children,
+  onClick,
 }: Props) => {
   const [isDesktop, setDesktop] = useState(window.innerWidth > 768);
 
@@ -42,13 +44,9 @@ const Button = ({
     }
   }
 
-  const handleClick = () => {
-    // event
-  };
-
   return (
     <button
-      onClick={handleClick}
+      onClick={onClick}
       className={`text-sm rounded-3xl flex py-2 px-2 
       ${variants[variant as keyof Variants]} 
       ${widthFull ? "w-full justify-center" : ""}`}

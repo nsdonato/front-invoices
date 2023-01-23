@@ -34,7 +34,7 @@ function Modal({
         } transition-all duration-300 ease-in-out`}
       >
         <header>
-          <h4 className="text-[24px] font-bold">{title}</h4>
+          <h4 className="text-[24px] font-bold text-brand-text">{title}</h4>
         </header>
         {children}
       </div>

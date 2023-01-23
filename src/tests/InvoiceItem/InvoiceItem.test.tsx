@@ -1,37 +1,43 @@
 import { render, screen } from "@testing-library/react";
-import InvoiceItem from "../../components/InvoiceItem/InvoiceItem";
+import InvoiceItem, { Status } from "../../components/InvoiceItem/InvoiceItem";
+
+const actualDate = new Date().toString();
 
 test("renders InvoiceItem component", () => {
   render(
     <InvoiceItem
       id="RT3080"
-      date={"Due 19 Aug 2021"}
+      date={"19 Aug 2021"}
       name="Jensen Huang"
       amount={1800}
       status={"paid"}
     />
   );
-  const invoiceItemElement = screen.getByText("RT3080");
-  expect(invoiceItemElement).toBeInTheDocument();
+  const invoiceItemID = screen.getByText("RT3080");
+  const invoiceItemDate = screen.getByText(`Due 19 Aug 2021`);
+  const invoiceItemName = screen.getByText("Jensen Huang");
+  const invoiceItemAmount = screen.getByText("£1,800.00");
+  const invoiceItemStatus = screen.getByText("Paid");
+  expect(invoiceItemID).toBeInTheDocument();
+  expect(invoiceItemDate).toBeInTheDocument();
+  expect(invoiceItemName).toBeInTheDocument();
+  expect(invoiceItemAmount).toBeInTheDocument();
+  expect(invoiceItemStatus).toBeInTheDocument();
 });
 
-// Test if the InvoiceItem component is rendering the correct amount
 test("renders correct amount in InvoiceItem component", () => {
   render(
     <InvoiceItem
       id="RT3080"
-      date={"Due 19 Aug 2021"}
+      date={actualDate}
       name="Jensen Huang"
       amount={1800}
       status={"paid"}
     />
   );
-  const invoiceItemElement = screen.getByText("1800.00");
+  const invoiceItemElement = screen.getByText("£1,800.00");
   expect(invoiceItemElement).toBeInTheDocument();
 });
-
-// Test if the InvoiceItem component is rendering the correct status
-type Status = "paid" | "pending" | "draft";
 
 test("renders correct status in InvoiceItem component", () => {
   const allStatus = ["paid", "pending", "draft"];
@@ -40,7 +46,7 @@ test("renders correct status in InvoiceItem component", () => {
     render(
       <InvoiceItem
         id="RT3080"
-        date={"Due 19 Aug 2021"}
+        date={actualDate}
         name="Jensen Huang"
         amount={1800}
         status={status as Status}

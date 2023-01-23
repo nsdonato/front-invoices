@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, ElementType } from "react";
 import { Link } from "react-router-dom";
 
-type Status = "pending" | "paid" | "draft";
+export type Status = "pending" | "paid" | "draft";
 
 type InvoiceItemProps<C extends ElementType> = {
   id: string;
@@ -9,7 +9,7 @@ type InvoiceItemProps<C extends ElementType> = {
   name: string;
   amount: number;
   status: Status;
-  as?: C extends "div" | "a" | typeof Link ? C : never;
+  typeOfElement?: C extends "div" | "a" | typeof Link ? C : never;
 } & ComponentPropsWithoutRef<C>;
 
 const invoiceBackgrounds: Record<Status, string> = {
@@ -50,20 +50,30 @@ export const InvoiceItem = <C extends ElementType>({
   name,
   amount,
   status,
-  as,
+  typeOfElement,
   ...props
 }: InvoiceItemProps<C>) => {
-  const dateTransformed = new Date(date).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
+  const MutableElement = typeOfElement ?? "div";
 
-  const MagicElement = as ?? "div";
+  const normalizedDate = (date: string) => {
+    const formatDate = new Date(date);
+    const day = formatDate.getDate();
+    const dateTransformed = formatDate.toLocaleDateString("en-US", {
+      month: "short",
+      year: "numeric",
+    });
+    return `${day} ${dateTransformed}`;
+  };
 
   const normalizedStatus = status.charAt(0).toUpperCase() + status.slice(1);
+
+  const normalizedAmount = amount.toLocaleString("en-US", {
+    style: "currency",
+    currency: "GBP",
+  });
+
   return (
-    <MagicElement
+    <MutableElement
       {...props}
       className="relative bg-white lg:max-w-3xl md:max-w-2xl max-w-sm py-4 lg:pr-6 md:pr-6 rounded-lg mx-auto my-4 dark:bg-brand-gray-dark grid md:grid-rows-1 lg:grid-rows-1 lg:grid-cols-5 md:grid-cols-5 grid-cols-2 items-center text-center shadow-md cursor-pointer text-sm border transition-all hover:border-brand-violet"
     >
@@ -72,17 +82,16 @@ export const InvoiceItem = <C extends ElementType>({
         {id}
       </p>
       <p className="text-brand-violet-muted dark:text-brand-violet-highlight md:mr-[2px] lg:order-2 md:order-2 order-2">
-        Due {dateTransformed.replaceAll(",", "")}
+        Due {normalizedDate(date)}
       </p>
       <p className="text-brand-text-light dark:text-white lg:order-3 md:order-3 order-1 lg:mb-0 md:mb-0 mb-3">
         {name}
       </p>
       <h4 className="font-bold text-base lg:order-4 md:order-4 order-4 ">
-        <span>£</span>
-        {amount.toFixed(2)}
+        {normalizedAmount}
       </h4>
       <div
-        className={`${invoiceBackgrounds[status]} max-w-[104px] mx-auto w-full relative py-2 rounded-md lg:order-5 md:order-5 order-3 row-span-2`}
+        className={`${invoiceBackgrounds[status]} max-w-[104px] mx-auto w-full relative py-3 rounded-md lg:order-5 md:order-5 order-3 row-span-2`}
       >
         <p className={`${invoiceTexts[status]} relative font-bold`}>
           <span
@@ -94,7 +103,7 @@ export const InvoiceItem = <C extends ElementType>({
       <span className="ml-2 w-fit right-5 absolute lg:block lg:order-6 md:block md:order-6 hidden">
         <Arrow />
       </span>
-    </MagicElement>
+    </MutableElement>
   );
 };
 

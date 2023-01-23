@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import Backdrop from "../Backdrop/Backdrop";
 
 interface ModalProps {
@@ -7,25 +8,34 @@ interface ModalProps {
   maxWidth?: number;
   onCloseRequest: () => void;
 }
+
 function Modal({
   children,
   show,
   title = "Confirm Deletion",
   onCloseRequest,
 }: ModalProps) {
-  const handleKeydown = (event: React.KeyboardEvent) => {
+  const handleKeydown = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
-      event.nativeEvent.stopImmediatePropagation();
+      event.stopImmediatePropagation();
       event.stopPropagation();
       onCloseRequest();
     }
   };
 
+  useEffect(() => {
+    if (show) {
+      document.addEventListener("keydown", handleKeydown);
+    }
+    return () => {
+      document.removeEventListener("keydown", handleKeydown);
+    };
+  }, [show]);
+
   return (
     <Backdrop show={show} onClick={onCloseRequest}>
       <div
         aria-modal="true"
-        onKeyDown={handleKeydown}
         onClick={(e) => {
           e.stopPropagation();
         }}

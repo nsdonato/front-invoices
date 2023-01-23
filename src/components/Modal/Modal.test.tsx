@@ -5,13 +5,13 @@ import Modal from "./Modal";
 describe("Modal", () => {
   let show = true;
 
-  function handleClick() {
+  function onCloseRequest() {
     show = false;
   }
 
   test("should render modal content and title", async () => {
     render(
-      <Modal title="Modal test" show={true} onCloseRequest={handleClick}>
+      <Modal title="Modal test" show={true} onCloseRequest={onCloseRequest}>
         Hola
       </Modal>
     );
@@ -23,9 +23,9 @@ describe("Modal", () => {
     expect(modalTitle).toBeInTheDocument();
   });
 
-  test("should render handle click", async () => {
+  test("should handle click", async () => {
     render(
-      <Modal title="Modal test" show={true} onCloseRequest={handleClick}>
+      <Modal title="Modal test" show={true} onCloseRequest={onCloseRequest}>
         Hola
       </Modal>
     );
@@ -33,6 +33,16 @@ describe("Modal", () => {
     const backdrop = screen.getByRole("dialog");
 
     await userEvent.click(backdrop);
+    expect(show).toBe(false);
+  });
+  test("should handle esc key", async () => {
+    render(
+      <Modal title="Modal test" show={true} onCloseRequest={onCloseRequest}>
+        Hola
+      </Modal>
+    );
+
+    await userEvent.keyboard("{Escape}");
     expect(show).toBe(false);
   });
 });

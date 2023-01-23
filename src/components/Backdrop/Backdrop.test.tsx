@@ -15,12 +15,23 @@ describe("Backdrop", () => {
     const backdrop = screen.getByRole("dialog");
     expect(backdrop).toBeInTheDocument();
   });
-  test("should render handle click", async () => {
+  test("should handle click", async () => {
     render(<Backdrop show={show} onClick={handleClick} />);
 
     const backdrop = screen.getByRole("dialog");
 
     await userEvent.click(backdrop);
     expect(show).toBe(false);
+  });
+  test("should not be displayed", async () => {
+    const { rerender } = render(<Backdrop show={show} onClick={handleClick} />);
+
+    const backdrop = screen.getByRole("dialog");
+
+    await userEvent.click(backdrop);
+    expect(show).toBe(false);
+
+    rerender(<Backdrop show={show} onClick={handleClick} />);
+    expect(backdrop).toHaveClass("opacity-0 pointer-events-none");
   });
 });

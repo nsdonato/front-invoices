@@ -1,6 +1,6 @@
 import useTheme from "../../hooks/useTheme";
 
-function Darkmode() {
+function DarkMode() {
   const { theme, handleTheme } = useTheme();
   const isLight = theme === "light";
 
@@ -14,4 +14,4 @@ function Darkmode() {
   );
 }
 
-export default Darkmode;
+export default DarkMode;

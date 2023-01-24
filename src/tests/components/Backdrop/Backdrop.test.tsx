@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { userEvent } from "../../utils/test-utils";
-import Backdrop from "./Backdrop";
+import userEvent from "@testing-library/user-event";
+import Backdrop from "../../../components/Backdrop/Backdrop";
 
 describe("Backdrop", () => {
   let show = true;

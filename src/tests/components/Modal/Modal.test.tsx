@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { userEvent } from "../../utils/test-utils";
-import Modal from "./Modal";
+import userEvent from "@testing-library/user-event";
+import Modal from "../../../components/Modal/Modal";
 
 describe("Modal", () => {
   let show = true;

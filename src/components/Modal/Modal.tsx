@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useEscapeKey } from "../../hooks/useEscapeKey";
 import Backdrop from "../Backdrop/Backdrop";
 
 interface ModalProps {
@@ -15,23 +16,7 @@ function Modal({
   title = "Confirm Deletion",
   onCloseRequest,
 }: ModalProps) {
-  const handleKeydown = (event: KeyboardEvent) => {
-    if (event.key === "Escape") {
-      event.stopImmediatePropagation();
-      event.stopPropagation();
-      onCloseRequest();
-    }
-  };
-
-  useEffect(() => {
-    if (show) {
-      document.addEventListener("keydown", handleKeydown);
-    }
-    return () => {
-      document.removeEventListener("keydown", handleKeydown);
-    };
-  }, [show]);
-
+  useEscapeKey(onCloseRequest);
   return (
     <Backdrop show={show} onClick={onCloseRequest}>
       <div

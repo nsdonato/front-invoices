@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { BrowserRouter, Link } from "react-router-dom";
 import InvoiceItem, { Status } from "../../components/InvoiceItem/InvoiceItem";
 
 const actualDate = new Date().toString();
@@ -57,4 +58,54 @@ test("renders correct status in InvoiceItem component", () => {
     );
     expect(invoiceItemElement).toBeInTheDocument();
   });
+});
+
+test("renders InvoiceItem component without typeOfElement prop", () => {
+  render(
+    <InvoiceItem
+      data-testid="invoice-item"
+      id="RT3080"
+      date={actualDate}
+      name="Jensen Huang"
+      amount={1800}
+      status={"paid"}
+    />
+  );
+  const invoiceItemElement = screen.getByTestId("invoice-item");
+  expect(invoiceItemElement.tagName).toBe("DIV");
+});
+
+test("renders InvoiceItem component with a typeOfElement as an anchor", () => {
+  render(
+    <InvoiceItem
+      typeOfElement="a"
+      data-testid="invoice-item"
+      id="RT3080"
+      date={actualDate}
+      name="Jensen Huang"
+      amount={1800}
+      status={"paid"}
+    />
+  );
+  const invoiceItemElement = screen.getByTestId("invoice-item");
+  expect(invoiceItemElement.tagName).toBe("A");
+});
+
+test("renders InvoiceItem component with a typeOfElement as Link", () => {
+  render(
+    <BrowserRouter>
+      <InvoiceItem
+        typeOfElement={Link}
+        to="/"
+        data-testid="invoice-item"
+        id="RT3080"
+        date={actualDate}
+        name="Jensen Huang"
+        amount={1800}
+        status={"paid"}
+      />
+    </BrowserRouter>
+  );
+  const invoiceItemElement = screen.getByTestId("invoice-item");
+  expect(invoiceItemElement.tagName).toBe("A");
 });

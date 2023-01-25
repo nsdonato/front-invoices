@@ -1,4 +1,4 @@
-const months = [
+export const months = [
   "Jan",
   "Feb",
   "Mar",
@@ -12,7 +12,11 @@ const months = [
   "Nov",
   "Dec",
 ];
-export function useCalendar({ incrementMonth = 0, incrementYear = 0 } = {}) {
+export function useDate({
+  incrementMonth = 0,
+  incrementYear = 0,
+  inputDate = new Date(),
+} = {}) {
   const getDaysInMonth = (month: number, year: number) => {
     return new Date(year, month + 1, 0).getDate();
   };

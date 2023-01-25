@@ -1,4 +1,4 @@
-name: 🚀 Vercel Production Deployment when merging to main
+name: 🤖 Workflow for merges to main
 
 on:
   push:

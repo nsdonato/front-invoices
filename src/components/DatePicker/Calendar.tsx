@@ -1,6 +1,18 @@
 import { useEffect, useRef } from "react";
 import { useDate } from "./hooks/useDate";
 
+interface CalendarProps {
+  theme: string;
+  isDarkTheme: (theme: string) => boolean;
+  date: Date;
+  closeCalendar: () => void;
+  handleClickDate: (day: number, month: number, year: number) => void;
+  setMonthCounter: React.Dispatch<React.SetStateAction<number>>;
+  monthCounter: number;
+  yearCounter: number;
+  setYearCounter: React.Dispatch<React.SetStateAction<number>>;
+}
+
 export function Calendar({
   closeCalendar,
   handleClickDate,
@@ -11,7 +23,7 @@ export function Calendar({
   date,
   theme,
   isDarkTheme,
-}: any = {}) {
+}: CalendarProps) {
   const { totalDaysToRender, daysInMonth, year, nameMonth, month } = useDate({
     incrementMonth: monthCounter,
     incrementYear: yearCounter,
@@ -23,7 +35,7 @@ export function Calendar({
     let newMonth: number = monthCounter;
     if (monthCounter === 0) {
       newMonth = 11;
-      setYearCounter((prevState: number) => prevState - 1);
+      setYearCounter(yearCounter - 1);
     } else {
       newMonth -= 1;
     }
@@ -33,7 +45,7 @@ export function Calendar({
     let newMonth: number = monthCounter;
     if (monthCounter === 11) {
       newMonth = 0;
-      setYearCounter((prevState: number) => prevState + 1);
+      setYearCounter(yearCounter + 1);
     } else {
       newMonth += 1;
     }

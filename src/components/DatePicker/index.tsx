@@ -73,15 +73,12 @@ export default function DatePicker({ theme }: CalendarProps) {
           theme={theme}
           isDarkTheme={isDarkTheme}
           date={date}
-          setDate={setDate}
-          isFocusedInput={isFocusedInput}
           closeCalendar={closeCalendar}
           handleClickDate={handleClickDate}
           monthCounter={monthCounter}
           setMonthCounter={setMonthCounter}
           yearCounter={yearCounter}
           setYearCounter={setYearCounter}
-          setFocusedInput={setFocusedInput}
         />
       )}
     </div>

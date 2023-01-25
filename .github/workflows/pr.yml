@@ -1,16 +1,6 @@
 name: 🚀 Vercel Preview Deployment when opening a PR
 
-on:
-  pull_request:
-    types:
-      - opened
-      - ready_for_review
-    branches:
-      - "feature/**"
-      - "bugfix/**"
-  push:
-    branches-ignore:
-      - main
+on: [pull_request]
 
 jobs:
   check-skip:
@@ -27,7 +17,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Auto assign owner
+      - name: "🤓 Auto Assign"
         uses: danielswensson/auto-assign-owner-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

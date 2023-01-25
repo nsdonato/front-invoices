@@ -22,7 +22,6 @@ jobs:
         with:
           access_token: ${{ github.token }}
   lint:
-    needs: [add-reviews]
     runs-on: ubuntu-latest
     name: 💅🏼 Linting
     steps:

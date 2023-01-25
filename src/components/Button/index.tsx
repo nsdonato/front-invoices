@@ -1,10 +1,9 @@
-import { useState } from "react";
+import React from "react";
 
 interface Props {
-  variant?: string;
-  buttonLabel: string;
+  variant?: "primary" | "secondary" | "tertiary" | "delete";
+  children: React.ReactNode;
   widthFull?: boolean;
-  children?: JSX.Element;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -25,38 +24,24 @@ const variants: Variants = {
 
 const Button = ({
   variant = "primary",
-  buttonLabel,
-  widthFull,
   children,
+  widthFull,
   onClick,
 }: Props) => {
-  const [isDesktop, setDesktop] = useState(window.innerWidth > 768);
-
-  window.addEventListener("resize", () => {
-    setDesktop(window.innerWidth > 768);
-  });
-
-  function renderLabel() {
-    if (isDesktop) {
-      return <span className="my-2 mx-4 pt-px">{buttonLabel}</span>;
-    } else {
-      return <span className="my-2 mx-2 pt-px">New</span>;
-    }
-  }
-
   return (
     <button
       onClick={onClick}
-      className={`text-sm rounded-3xl flex py-2 px-2 
+      className={`text-sm rounded-3xl flex items-center py-2 px-2 h-12
       ${variants[variant as keyof Variants]} 
       ${widthFull ? "w-full justify-center" : ""}`}
     >
-      {children}
-      {buttonLabel === "New Invoice" ? (
-        renderLabel()
-      ) : (
-        <span className="my-2 mx-4 pt-px">{buttonLabel}</span>
-      )}
+      {React.Children.map(children, (child) => {
+        if (React.isValidElement(child)) {
+          return child;
+        } else {
+          return <span className="mt-[9px] mb-2 mx-4">{child}</span>;
+        }
+      })}
     </button>
   );
 };

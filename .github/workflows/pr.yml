@@ -12,6 +12,23 @@ on:
       - main
 
 jobs:
+  check-skip:
+    name: ✋🏼 Cancel Previous Redundant Builds
+    runs-on: ubuntu-latest
+    steps:
+      - name: ✋🏼 Cancel Previous Redundant Builds
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+  add_assignees:
+    runs-on: ubuntu-latest
+    name: 🤓 Auto assign PR to creator
+    steps:
+      - name: 🤓 Auto assign PR to creator
+        uses: actions-ecosystem/action-add-assignees@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          assignees: ${{ github.actor }}
   lint:
     runs-on: ubuntu-latest
     name: 💅🏼 Linting

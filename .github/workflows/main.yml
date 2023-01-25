@@ -5,6 +5,14 @@ on:
     branches: [main]
 
 jobs:
+  check-skip:
+    name: ✋🏼 Cancel Previous Redundant Builds
+    runs-on: ubuntu-latest
+    steps:
+      - name: ✋🏼 Cancel Previous Redundant Builds
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
   lint:
     runs-on: ubuntu-latest
     name: 💅🏼 Linting

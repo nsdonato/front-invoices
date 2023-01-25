@@ -12,7 +12,6 @@ jobs:
         with:
           access_token: ${{ github.token }}
   add-reviews:
-    needs: [create-pull-request]
     name: "🤓 Auto Assign"
     runs-on: ubuntu-latest
     steps:

@@ -4,6 +4,7 @@ on:
   pull_request:
     types:
       - opened
+      - ready_for_review
     branches:
       - "feature/**"
       - "bugfix/**"
@@ -20,7 +21,13 @@ jobs:
         uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{ github.token }}
+  add-reviews:
+    name: "🤓 Auto Assign"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: kentaro-m/auto-assign-action@v1.2.4
   lint:
+    needs: [add-reviews]
     runs-on: ubuntu-latest
     name: 💅🏼 Linting
     steps:

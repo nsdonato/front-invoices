@@ -1,17 +1,26 @@
 name: 🚀 Vercel Preview Deployment when opening a PR
 
-on:
-  pull_request:
-    types:
-      - opened
-    branches:
-      - "feature/**"
-      - "bugfix/**"
-  push:
-    branches-ignore:
-      - main
+on: [pull_request]
 
 jobs:
+  check-skip:
+    name: ✋🏼 Cancel Previous Redundant Builds
+    runs-on: ubuntu-latest
+    steps:
+      - name: ✋🏼 Cancel Previous Redundant Builds
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+  add-reviews:
+    name: "🤓 Auto Assign"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: "🤓 Auto Assign"
+        uses: danielswensson/auto-assign-owner-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
   lint:
     runs-on: ubuntu-latest
     name: 💅🏼 Linting

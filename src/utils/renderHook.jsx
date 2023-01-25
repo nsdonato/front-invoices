@@ -5,7 +5,7 @@ function renderHook(renderCallback, options = {}) {
   const { initialProps, wrapper } = options;
   const result = React.createRef();
 
-  function TestComponent({ renderCallbackProps }: any) {
+  function TestComponent({ renderCallbackProps }) {
     const pendingResult = renderCallback(renderCallbackProps);
 
     React.useEffect(() => {

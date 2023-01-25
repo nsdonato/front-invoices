@@ -30,6 +30,7 @@ jobs:
           github_token: ${{ secrets.github_token }}
           assignees: ${{ github.actor }}
           number: ${{ github.event.pull_request.number }}
+          issue_number: ${{ github.event.issue.number }}
   lint:
     runs-on: ubuntu-latest
     name: 💅🏼 Linting

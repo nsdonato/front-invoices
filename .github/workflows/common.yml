@@ -2,7 +2,11 @@ name: 🤖 Common Workflow
 
 on:
   pull_request:
-    branches: [opened]
+    types:
+      - opened
+    branches:
+      - "feature/**"
+      - "bugfix/**"
   push:
     branches: [main]
 
@@ -24,58 +28,3 @@ jobs:
         with:
           github_token: ${{ secrets.github_token }}
           assignees: ${{ github.actor }}
-  lint:
-    runs-on: ubuntu-latest
-    name: 💅🏼 Linting
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 18
-          registry-url: "https://registry.npmjs.org"
-      - name: Install dependencies
-        run: npm ci
-      - name: 💅🏼 Linting
-        run: npm run lint
-  build:
-    needs: [lint]
-    runs-on: ubuntu-latest
-    name: 👷🏻‍♀️ Build
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 18
-          registry-url: "https://registry.npmjs.org"
-      - name: Install dependencies
-        run: npm ci
-      - name: 👷🏻‍♀️ Build
-        run: npm run build
-      - uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: dist
-  testing:
-    needs: [lint, build]
-    runs-on: ubuntu-latest
-    name: 🧐 Testing
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 18
-          registry-url: "https://registry.npmjs.org"
-      - name: Install dependencies
-        run: npm ci
-      - uses: actions/download-artifact@v2
-        with:
-          name: dist
-          path: dist
-      - name: 🧐 Unit testing
-        run: npm run test

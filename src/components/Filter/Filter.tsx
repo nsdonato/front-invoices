@@ -34,10 +34,13 @@ export const Filter = () => {
         </span>
 
         {isOpen ? (
-          <SvgImg src="/src/assets/images/icon-arrow-up.svg" alt="arrow-up" />
+          <SvgImg
+            src="/public/assets/images/icon-arrow-up.svg"
+            alt="arrow-up"
+          />
         ) : (
           <SvgImg
-            src="/src/assets/images/icon-arrow-down.svg"
+            src="/public/assets/images/icon-arrow-down.svg"
             alt="arrow-down"
           />
         )}

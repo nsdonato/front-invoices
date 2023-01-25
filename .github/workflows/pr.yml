@@ -26,8 +26,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: kentaro-m/auto-assign-action@v1.2.4
-        with:
-          repo_token: ${{ github.token }}
+        # with:
+        #   repo_token: ${{ github.token }}
   lint:
     runs-on: ubuntu-latest
     name: 💅🏼 Linting

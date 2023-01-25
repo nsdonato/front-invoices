@@ -25,9 +25,12 @@ jobs:
     name: "🤓 Auto Assign"
     runs-on: ubuntu-latest
     steps:
-      - uses: kentaro-m/auto-assign-action@v1.2.4
-        # with:
-        #   repo_token: ${{ github.token }}
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Auto assign owner
+        uses: danielswensson/auto-assign-owner-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
   lint:
     runs-on: ubuntu-latest
     name: 💅🏼 Linting

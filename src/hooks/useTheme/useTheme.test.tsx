@@ -1,5 +1,6 @@
+import { act } from "react-dom/test-utils";
 import useTheme from ".";
-import { renderHook, act } from "@testing-library/react-hooks";
+import renderHook from "../../utils/renderHook";
 
 describe("useTheme", () => {
   beforeEach(() => {

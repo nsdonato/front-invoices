@@ -1,36 +1,28 @@
-import { useState, ChangeEvent } from "react";
 import { SvgImg } from "../SvgImg/SvgImg";
 
-export const Filter = () => {
-  const isMobile = false;
+interface Props {
+  isOpen: boolean;
+  toggleOpen: any;
+  filtersType: any;
+  selectFilter: any;
+  buttonText: string;
+}
 
-  const [isOpen, setisOpen] = useState(false);
-
-  const [filterType, setFilterType] = useState({
-    draft: false,
-    paid: false,
-    pending: false,
-  });
-
-  const filterView = (event: ChangeEvent<HTMLInputElement>) => {
-    setFilterType({
-      ...filterType,
-      [event.target.name]: event.target.checked,
-    });
-  };
-
-  const clickHandler = () => {
-    setisOpen(!isOpen);
-  };
-
+export const Filter = ({
+  isOpen,
+  toggleOpen,
+  filtersType,
+  selectFilter,
+  buttonText,
+}: Props) => {
   return (
     <div className=" relative flex  justify-center items-center gap-40 ">
       <button
-        onClick={clickHandler}
+        onClick={toggleOpen}
         className="cursor-pointer flex  items-center justify-center gap-3"
       >
         <span className="text-brand-text dark:text-brand-white ">
-          {isMobile ? "Filter" : "Filter by status"}
+          {buttonText}
         </span>
 
         {isOpen ? (
@@ -54,11 +46,11 @@ export const Filter = () => {
       >
         <label
           className={`flex justify-start items-center gap-3 h-3 w-3 bg-brand-violet-highlight rounded-sm bg-center bg-no-repeat hover:cursor-pointer
-        ${filterType.draft ? " bg-brand-violet" : ""}
+        ${filtersType.draft ? " bg-brand-violet" : ""}
         `}
         >
           <input
-            onChange={filterView}
+            onChange={selectFilter}
             type="checkbox"
             className="accent-brand-violet"
             name="draft"
@@ -67,11 +59,11 @@ export const Filter = () => {
         </label>
         <label
           className={`flex justify-start items-center gap-3 h-3 w-3 bg-brand-violet-highlight rounded-sm bg-center bg-no-repeat hover:cursor-pointer
-${filterType.pending ? " bg-brand-violet" : ""}
+${filtersType.pending ? " bg-brand-violet" : ""}
 `}
         >
           <input
-            onChange={filterView}
+            onChange={selectFilter}
             type="checkbox"
             className="accent-brand-violet"
             name="pending"
@@ -81,11 +73,11 @@ ${filterType.pending ? " bg-brand-violet" : ""}
 
         <label
           className={`flex  justify-start items-center gap-3 h-3 w-3 bg-brand-violet-highlight  rounded-sm bg-center bg-no-repeat hover:cursor-pointer
-${filterType.paid ? " bg-brand-violet" : ""}
+${filtersType.paid ? " bg-brand-violet" : ""}
 `}
         >
           <input
-            onChange={filterView}
+            onChange={selectFilter}
             type="checkbox"
             className=" accent-brand-violet "
             name="paid"

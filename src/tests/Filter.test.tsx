@@ -1,14 +1,50 @@
 import { Filter } from "../components/Filter/Filter";
-import { render, screen, fireEvent } from "../utils/test-utils";
+import { render, screen, vi } from "../utils/test-utils";
 import userEvent from "@testing-library/user-event";
 
 describe.only("Filter", () => {
   test("should render Filter component", () => {
-    render(<Filter />);
+    const toggleOpen = () => vi.fn();
+    const buttonText = "Cracks";
+    const filtersType = {
+      draft: false,
+      paid: false,
+      pending: false,
+    };
+    const isOpen = true;
+    const selectFilter = vi.fn();
+
+    render(
+      <Filter
+        toggleOpen={toggleOpen}
+        buttonText={buttonText}
+        filtersType={filtersType}
+        isOpen={isOpen}
+        selectFilter={selectFilter}
+      />
+    );
   });
 
   test("should open dropdown", async () => {
-    render(<Filter />);
+    const toggleOpen = () => vi.fn();
+
+    const filtersType = {
+      draft: false,
+      paid: false,
+      pending: false,
+    };
+    const isOpen = true;
+    const selectFilter = vi.fn();
+
+    render(
+      <Filter
+        toggleOpen={toggleOpen}
+        buttonText={"Filter by status"}
+        filtersType={filtersType}
+        isOpen={isOpen}
+        selectFilter={selectFilter}
+      />
+    );
 
     const filterButtonToOpen = screen.getByRole("button", {
       name: /filter/i,
@@ -22,26 +58,28 @@ describe.only("Filter", () => {
   });
 
   test("show options", () => {
-    const component = render(<Filter />);
+    const toggleOpen = () => vi.fn();
+
+    const filtersType = {
+      draft: false,
+      paid: false,
+      pending: false,
+    };
+    const isOpen = true;
+    const selectFilter = vi.fn();
+
+    const component = render(
+      <Filter
+        toggleOpen={toggleOpen}
+        buttonText={"Filter by"}
+        filtersType={filtersType}
+        isOpen={isOpen}
+        selectFilter={selectFilter}
+      />
+    );
 
     component.getByText("Paid");
     component.getByText("Pending");
     component.getByText("Draft");
-  });
-
-  test(" dropdown toggle visibility at click", () => {
-    const { container } = render(<Filter />);
-
-    const filterButtonToOpen = screen.getByRole("button", {
-      name: /filter/i,
-    });
-
-    fireEvent.click(filterButtonToOpen);
-
-    const filterList = container.querySelector(".absolute.flex-col");
-    expect(filterList).toHaveClass("flex");
-
-    fireEvent.click(filterButtonToOpen);
-    expect(filterList).not.toHaveClass("flex");
   });
 });

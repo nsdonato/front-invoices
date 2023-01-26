@@ -68,7 +68,7 @@ jobs:
           path: dist
       - name: 🧐 Unit testing
         run: npm run test
-  Deploy-Production:
+  deploy-Production:
     needs: [testing]
     runs-on: ubuntu-latest
     name: 🚀 Vercel Production Deployment

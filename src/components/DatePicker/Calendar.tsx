@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useDate } from "./hooks/useDate";
 
 interface CalendarProps {
@@ -27,9 +27,7 @@ export function Calendar({
   const { totalDaysToRender, daysInMonth, year, nameMonth, month } = useDate({
     incrementMonth: monthCounter,
     incrementYear: yearCounter,
-    inputDate: date,
   });
-  const calendar = useRef<HTMLDivElement>(null);
 
   const handlePrevMonth = () => {
     let newMonth: number = monthCounter;
@@ -66,12 +64,14 @@ export function Calendar({
       date.getFullYear() === year
     );
   };
+  const isWithinTheMonth = (day: number) => {
+    return day < daysInMonth;
+  };
 
   return (
     <div
-      ref={calendar}
-      className={`w-full flex flex-col gap-5 h-[243px] px-[18px] max-w-[240px] self-start brand-md:self-center rounded-lg mt-4
-      ${isDarkTheme(theme) ? "bg-[#252945]" : ""} `}
+      className={`w-full flex flex-col items-center gap-5 h-[243px] px-[18px] max-w-[240px] self-start brand-md:self-center rounded-lg mt-4
+      ${isDarkTheme(theme) ? "bg-[#252945]" : "border-[red]"} `}
     >
       <div className="flex justify-between tracking-tight	w-[193px] h-[15px] text-fontSize-xs line-height-[15px] pt-[25px] pb-[32px]">
         <div className="cursor-pointer font-bold p-1" onClick={handlePrevMonth}>
@@ -96,14 +96,20 @@ export function Calendar({
                 closeCalendar();
               }}
               key={i}
-              className={`hover:cursor-pointer text-center font-bold text-sm h-[15px] w-[18px] ${
-                i < daysInMonth
-                  ? "text-brand-text"
-                  : "text-brand-text-muted pointer-events-none"
-              }
-              ${isDaySelected(day, month, year) ? "text-brand-violet" : ""}
-              ${isDarkTheme(theme) ? "text-brand-white" : ""}
-              `}
+              className={`hover:cursor-pointer text-center font-bold text-sm h-[15px] 
+                ${
+                  isDarkTheme(theme)
+                    ? isDaySelected(day, month, year)
+                      ? "text-brand-violet"
+                      : isWithinTheMonth(i)
+                      ? "text-brand-white"
+                      : "text-brand-text-muted pointer-events-none"
+                    : isDaySelected(day, month, year)
+                    ? "text-brand-violet"
+                    : isWithinTheMonth(i)
+                    ? "text-brand-text"
+                    : "text-brand-text-muted pointer-events-none"
+                }`}
             >
               {day}
             </div>

@@ -2,10 +2,12 @@ import { Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <p>Welcome to Invoice App</p>
-      <Outlet />
-    </>
+    <div>
+      <>
+        <p>Welcome to Invoice App</p>
+        <Outlet />
+      </>
+    </div>
   );
 }
 

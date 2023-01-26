@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Calendar } from "./Calendar";
 import { formatDate } from "./helpers";
 import { useDate } from "./hooks/useDate";
@@ -19,6 +19,7 @@ export default function DatePicker({ theme }: CalendarProps) {
   const [monthCounter, setMonthCounter] = useState<number>(month);
   const [yearCounter, setYearCounter] = useState<number>(0);
   const inputElement = useRef(null);
+  const calendar = useRef<HTMLDivElement>(null);
 
   const handleClickInput = () => {
     setFocusedInput((prevState) => !prevState);
@@ -28,59 +29,75 @@ export default function DatePicker({ theme }: CalendarProps) {
     setDate(newDate);
   };
   const closeCalendar = () => {
-    setFocusedInput(false);
+    setFocusedInput((prevState) => !prevState);
   };
 
   const isDarkTheme = (theme: string): boolean => {
-    console.log(theme);
     return theme === "dark";
   };
+  useEffect(() => {
+    const handleClickListener = (e: MouseEvent) => {
+      const target = e.target as Element;
+
+      if (!calendar.current?.contains(target as Node)) {
+        closeCalendar();
+      }
+    };
+    if (isFocusedInput) {
+      window.addEventListener("click", handleClickListener);
+    } else {
+      window.removeEventListener("click", handleClickListener);
+    }
+    return () => {
+      window.removeEventListener("click", handleClickListener);
+    };
+  }, [isFocusedInput]);
 
   return (
     <div
-      className={`flex flex-col items-center w-full
-    ${
-      isDarkTheme(theme)
-        ? "bg-brand-bg-dark text-brand-white"
-        : "bg-brand-white"
-    }
-    `}
+      className={`flex flex-col items-center w-full ${
+        isDarkTheme(theme)
+          ? "bg-brand-bg-dark text-brand-white"
+          : "bg-brand-white"
+      }`}
     >
-      <div
-        onClick={handleClickInput}
-        className={`w-full mx-auto flex justify-between cursor-pointer items-center px-[1rem] h-[3rem] border-solid border-2 brand-md:max-w-[15rem] rounded
-        ${
-          isDarkTheme(theme)
-            ? "bg-[#252945] border-transparent"
-            : " border-brand-violet"
-        }
-        `}
-      >
-        <input
-          type="text"
-          readOnly={true}
-          className="input-calendar bg-transparent text-start cursor-pointer focus:outline-none caret-transparent"
-          value={formatDate(date)}
-          ref={inputElement}
-          name="dateComponentInput"
-        />
-        <div>
-          <img src="./assets/icon-calendar.svg" alt="Calendar icon" />
+      <div ref={calendar} className="DatePicker w-full brand-md:max-w-[15rem]">
+        <div
+          onClick={handleClickInput}
+          className={`mx-auto flex justify-between cursor-pointer items-center px-[1rem] h-[3rem] border-solid border-2 select-none rounded ${
+            isDarkTheme(theme)
+              ? "bg-[#252945] border-transparent"
+              : isFocusedInput
+              ? "border-brand-violet"
+              : "border-brand-violet-highlight"
+          }`}
+        >
+          <input
+            type="text"
+            readOnly={true}
+            className="input-calendar bg-transparent text-start cursor-pointer focus:outline-none caret-transparent"
+            value={formatDate(date)}
+            ref={inputElement}
+            name="dateComponentInput"
+          />
+          <div>
+            <img src="./assets/icon-calendar.svg" alt="Calendar icon" />
+          </div>
         </div>
+        {isFocusedInput && (
+          <Calendar
+            theme={theme}
+            isDarkTheme={isDarkTheme}
+            date={date}
+            closeCalendar={closeCalendar}
+            handleClickDate={handleClickDate}
+            monthCounter={monthCounter}
+            setMonthCounter={setMonthCounter}
+            yearCounter={yearCounter}
+            setYearCounter={setYearCounter}
+          />
+        )}
       </div>
-      {isFocusedInput && (
-        <Calendar
-          theme={theme}
-          isDarkTheme={isDarkTheme}
-          date={date}
-          closeCalendar={closeCalendar}
-          handleClickDate={handleClickDate}
-          monthCounter={monthCounter}
-          setMonthCounter={setMonthCounter}
-          yearCounter={yearCounter}
-          setYearCounter={setYearCounter}
-        />
-      )}
     </div>
   );
 }

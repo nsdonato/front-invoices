@@ -1,33 +1,43 @@
-import { useEffect } from "react";
-import { useDate } from "./hooks/useDate";
+import { useEffect, useState } from "react";
+import { getDaysCalendar } from "./helpers/getDaysCalendar";
+
+// interface CalendarProps {
+//   theme: string;
+//   isDarkTheme: (theme: string) => boolean;
+//   date: Date;
+//   closeCalendar: () => void;
+//   handleClickDate: (day: number, month: number, year: number) => void;
+//   setMonthCounter: React.Dispatch<React.SetStateAction<number>>;
+//   monthCounter: number;
+//   yearCounter: number;
+//   setYearCounter: React.Dispatch<React.SetStateAction<number>>;
+// }
 
 interface CalendarProps {
-  theme: string;
-  isDarkTheme: (theme: string) => boolean;
-  date: Date;
   closeCalendar: () => void;
   handleClickDate: (day: number, month: number, year: number) => void;
-  setMonthCounter: React.Dispatch<React.SetStateAction<number>>;
-  monthCounter: number;
-  yearCounter: number;
-  setYearCounter: React.Dispatch<React.SetStateAction<number>>;
+  date: Date;
+  theme: string;
+  isDarkTheme: (theme: string) => boolean;
 }
-
 export function Calendar({
   closeCalendar,
   handleClickDate,
-  monthCounter,
-  setMonthCounter,
-  yearCounter,
-  setYearCounter,
   date,
   theme,
   isDarkTheme,
 }: CalendarProps) {
-  const { totalDaysToRender, daysInMonth, year, nameMonth, month } = useDate({
-    incrementMonth: monthCounter,
-    incrementYear: yearCounter,
-  });
+  const dateFromInput = date;
+  const [dateInCalendar, setDateInCalendar] = useState<Date>(dateFromInput);
+  const initialMonth = dateInCalendar.getMonth();
+  const initialYear = dateInCalendar.getFullYear();
+  const [monthCounter, setMonthCounter] = useState<number>(initialMonth);
+  const [yearCounter, setYearCounter] = useState<number>(initialYear);
+
+  const { totalDaysToRender, daysInMonth, year, nameMonth, month } =
+    getDaysCalendar({
+      dateToRenderInCalendar: dateInCalendar,
+    });
 
   const handlePrevMonth = () => {
     let newMonth: number = monthCounter;
@@ -51,11 +61,14 @@ export function Calendar({
   };
 
   useEffect(() => {
-    return () => {
-      setMonthCounter(date.getMonth());
-      setYearCounter(0);
-    };
-  }, []);
+    const firstDayMonth = 1;
+    const newDateInCalendar = new Date(
+      yearCounter,
+      monthCounter,
+      firstDayMonth
+    );
+    setDateInCalendar(newDateInCalendar);
+  }, [monthCounter, yearCounter]);
 
   const isDaySelected = (day: number, month: number, year: number) => {
     return (

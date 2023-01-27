@@ -1,23 +1,19 @@
 import { useState, useRef, useEffect } from "react";
 import { Calendar } from "./Calendar";
 import { formatDate } from "./helpers";
-import { useDate } from "./hooks/useDate";
-
 interface CalendarProps {
   theme: string;
 }
 
 export default function DatePicker({ theme }: CalendarProps) {
-  const { dateToday, month } = useDate();
-  const { day, year } = dateToday;
+  // const { dateToday, month } = useDate();
+  // const { day, year } = dateToday;
   // const initialState = new Date(year, month, day);
 
-  const initialState = new Date(year, month, day);
-
+  // const initialState = new Date(year, month, day);
+  const initialState = new Date();
   const [date, setDate] = useState<Date>(initialState);
   const [isFocusedInput, setFocusedInput] = useState<boolean>(false);
-  const [monthCounter, setMonthCounter] = useState<number>(month);
-  const [yearCounter, setYearCounter] = useState<number>(0);
   const inputElement = useRef(null);
   const calendar = useRef<HTMLDivElement>(null);
 
@@ -91,10 +87,6 @@ export default function DatePicker({ theme }: CalendarProps) {
             date={date}
             closeCalendar={closeCalendar}
             handleClickDate={handleClickDate}
-            monthCounter={monthCounter}
-            setMonthCounter={setMonthCounter}
-            yearCounter={yearCounter}
-            setYearCounter={setYearCounter}
           />
         )}
       </div>

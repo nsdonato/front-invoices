@@ -5,15 +5,11 @@ interface CalendarProps {
   closeCalendar: () => void;
   handleClickDate: (day: number, month: number, year: number) => void;
   date: Date;
-  theme: string;
-  isDarkTheme: (theme: string) => boolean;
 }
 export function Calendar({
   closeCalendar,
   handleClickDate,
   date,
-  theme,
-  isDarkTheme,
 }: CalendarProps) {
   const dateFromInput = date;
   const [dateInCalendar, setDateInCalendar] = useState<Date>(dateFromInput);
@@ -51,11 +47,22 @@ export function Calendar({
   const isWithinTheMonth = (day: number) => {
     return day < daysInMonth;
   };
+  const getColorDay = (
+    index: number,
+    day: number,
+    month: number,
+    year: number
+  ) => {
+    return isWithinTheMonth(index)
+      ? isDaySelected(day, month, year)
+        ? "text-brand-violet"
+        : "text-brand-text dark:text-brand-white"
+      : "text-brand-text-muted pointer-events-none";
+  };
 
   return (
     <div
-      className={`w-full flex flex-col items-center gap-5 h-[243px] px-[18px] max-w-[240px] self-start brand-md:self-center rounded-lg mt-4
-      ${isDarkTheme(theme) ? "bg-[#252945]" : "border-[red]"} `}
+      className={`w-full flex flex-col items-center gap-5 h-[243px] px-[18px] max-w-[240px] self-start brand-md:self-center rounded-lg mt-4 dark:bg-brand-gray-muted absolute bg-brand-white`}
     >
       <div className="flex justify-between tracking-tight	w-[193px] h-[15px] text-fontSize-xs line-height-[15px] pt-[25px] pb-[32px]">
         <div className="cursor-pointer font-bold p-1" onClick={handlePrevMonth}>
@@ -80,20 +87,8 @@ export function Calendar({
                 closeCalendar();
               }}
               key={i}
-              className={`hover:cursor-pointer text-center font-bold text-sm h-[15px] 
-                ${
-                  isDarkTheme(theme)
-                    ? isDaySelected(day, month, year)
-                      ? "text-brand-violet"
-                      : isWithinTheMonth(i)
-                      ? "text-brand-white"
-                      : "text-brand-text-muted pointer-events-none"
-                    : isDaySelected(day, month, year)
-                    ? "text-brand-violet"
-                    : isWithinTheMonth(i)
-                    ? "text-brand-text"
-                    : "text-brand-text-muted pointer-events-none"
-                }`}
+              className={`hover:cursor-pointer hover:text-brand-violet dark:hover:text-brand-violet text-center font-bold text-sm h-[15px] 
+              ${getColorDay(i, day, month, year)}`}
             >
               {day}
             </div>

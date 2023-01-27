@@ -1,16 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { Calendar } from "./Calendar";
 import { formatDate } from "./helpers";
-interface CalendarProps {
-  theme: string;
-}
 
-export default function DatePicker({ theme }: CalendarProps) {
-  // const { dateToday, month } = useDate();
-  // const { day, year } = dateToday;
-  // const initialState = new Date(year, month, day);
-
-  // const initialState = new Date(year, month, day);
+export default function DatePicker() {
   const initialState = new Date();
   const [date, setDate] = useState<Date>(initialState);
   const [isFocusedInput, setFocusedInput] = useState<boolean>(false);
@@ -28,9 +20,6 @@ export default function DatePicker({ theme }: CalendarProps) {
     setFocusedInput((prevState) => !prevState);
   };
 
-  const isDarkTheme = (theme: string): boolean => {
-    return theme === "dark";
-  };
   useEffect(() => {
     const handleClickListener = (e: MouseEvent) => {
       const target = e.target as Element;
@@ -51,45 +40,36 @@ export default function DatePicker({ theme }: CalendarProps) {
 
   return (
     <div
-      className={`flex flex-col items-center w-full ${
-        isDarkTheme(theme)
-          ? "bg-brand-bg-dark text-brand-white"
-          : "bg-brand-white"
-      }`}
+      ref={calendar}
+      className="DatePicker dark:text-brand-white w-full brand-md:max-w-[15rem] relative"
     >
-      <div ref={calendar} className="DatePicker w-full brand-md:max-w-[15rem]">
-        <div
-          onClick={handleClickInput}
-          className={`mx-auto flex justify-between cursor-pointer items-center px-[1rem] h-[3rem] border-solid border-2 select-none rounded ${
-            isDarkTheme(theme)
-              ? "bg-[#252945] border-transparent"
-              : isFocusedInput
-              ? "border-brand-violet"
-              : "border-brand-violet-highlight"
-          }`}
-        >
-          <input
-            type="text"
-            readOnly={true}
-            className="input-calendar bg-transparent text-start cursor-pointer focus:outline-none caret-transparent"
-            value={formatDate(date)}
-            ref={inputElement}
-            name="dateComponentInput"
-          />
-          <div>
-            <img src="./assets/icon-calendar.svg" alt="Calendar icon" />
-          </div>
+      <div
+        onClick={handleClickInput}
+        className={`mx-auto flex justify-between cursor-pointer items-center px-[1rem] h-[3rem] border-solid border-2 select-none rounded dark:bg-brand-gray-muted dark:border-transparent ${
+          isFocusedInput
+            ? "border-brand-violet"
+            : "border-brand-violet-highlight"
+        }`}
+      >
+        <input
+          type="text"
+          readOnly={true}
+          className="input-calendar bg-transparent text-start cursor-pointer focus:outline-none caret-transparent"
+          value={formatDate(date)}
+          ref={inputElement}
+          name="dateComponentInput"
+        />
+        <div>
+          <img src="./assets/icon-calendar.svg" alt="Calendar icon" />
         </div>
-        {isFocusedInput && (
-          <Calendar
-            theme={theme}
-            isDarkTheme={isDarkTheme}
-            date={date}
-            closeCalendar={closeCalendar}
-            handleClickDate={handleClickDate}
-          />
-        )}
       </div>
+      {isFocusedInput && (
+        <Calendar
+          date={date}
+          closeCalendar={closeCalendar}
+          handleClickDate={handleClickDate}
+        />
+      )}
     </div>
   );
 }

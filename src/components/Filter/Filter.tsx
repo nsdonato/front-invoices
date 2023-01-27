@@ -2,9 +2,13 @@ import { SvgImg } from "../SvgImg/SvgImg";
 
 interface Props {
   isOpen: boolean;
-  toggleOpen: any;
-  filtersType: any;
-  selectFilter: any;
+  toggleOpen: () => void;
+  filtersType: {
+    draft: boolean;
+    paid: boolean;
+    pending: boolean;
+  };
+  selectFilter: (event: React.ChangeEvent<HTMLInputElement>) => void;
   buttonText: string;
 }
 
@@ -39,47 +43,68 @@ export const Filter = ({
       </button>
       <div
         role="listbox"
-        className={` absolute  dark:text-brand-white dark:bg-brand-gray-muted -bottom-28 right-30 w-44  flex-col gap-3  rounded-lg p-6 box-border shadow-md 
+        className={` absolute  dark:text-brand-white dark:bg-brand-gray-muted -bottom-32 right-30 w-44  flex-col gap-1  rounded-lg p-4 box-border shadow-md 
       ${isOpen ? "flex" : "hidden"}
       
       `}
       >
         <label
-          className={`flex justify-start items-center gap-3 h-3 w-3 bg-brand-violet-highlight rounded-sm bg-center bg-no-repeat hover:cursor-pointer
-        ${filtersType.draft ? " bg-brand-violet" : ""}
+          className={`group flex justify-start items-center gap-3 rounded-sm bg-center bg-no-repeat hover:cursor-pointer select-none 
+        
+        
         `}
         >
           <input
             onChange={selectFilter}
+            className="appearance-none w-3 h-3 rounded-sm 
+            bg-brand-violet-highlight
+            dark:bg-brand-bg-dark
+            dark:checked:bg-brand-violet 
+            checked:bg-[url('/public/assets/images/icon-check.svg')]
+             border-slate-600 border checked:bg-brand-violet 
+            group-hover:border-brand-violet "
             type="checkbox"
-            className="accent-brand-violet"
             name="draft"
           />
           <span>Draft</span>
         </label>
         <label
-          className={`flex justify-start items-center gap-3 h-3 w-3 bg-brand-violet-highlight rounded-sm bg-center bg-no-repeat hover:cursor-pointer
-${filtersType.pending ? " bg-brand-violet" : ""}
-`}
+          className={`group flex justify-start items-center gap-3 rounded-sm bg-center bg-no-repeat hover:cursor-pointer select-none 
+        
+        
+        `}
         >
           <input
             onChange={selectFilter}
+            className="appearance-none w-3 h-3 rounded-sm 
+            bg-brand-violet-highlight
+            dark:bg-brand-bg-dark
+            dark:checked:bg-brand-violet 
+            checked:bg-[url('/public/assets/images/icon-check.svg')]
+             border-slate-600 border checked:bg-brand-violet 
+            group-hover:border-brand-violet "
             type="checkbox"
-            className="accent-brand-violet"
             name="pending"
           />
           <span>Pending</span>
         </label>
 
         <label
-          className={`flex  justify-start items-center gap-3 h-3 w-3 bg-brand-violet-highlight  rounded-sm bg-center bg-no-repeat hover:cursor-pointer
-${filtersType.paid ? " bg-brand-violet" : ""}
-`}
+          className={`group flex justify-start items-center gap-3 rounded-sm bg-center bg-no-repeat hover:cursor-pointer select-none 
+        
+        
+        `}
         >
           <input
             onChange={selectFilter}
+            className="appearance-none w-3 h-3 rounded-sm 
+            bg-brand-violet-highlight
+            dark:bg-brand-bg-dark
+            dark:checked:bg-brand-violet 
+            checked:bg-[url('/public/assets/images/icon-check.svg')]
+             border-slate-600 border checked:bg-brand-violet 
+            group-hover:border-brand-violet "
             type="checkbox"
-            className=" accent-brand-violet "
             name="paid"
           />
           <span>Paid</span>

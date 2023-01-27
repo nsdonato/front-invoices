@@ -7,10 +7,13 @@ export const useFilter = () => {
   const [filterType, setFilterType] = useState<Status[]>([]);
 
   const filterView = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFilterType({
-      ...filterType,
-      [event.target.name]: event.target.checked,
-    });
+    if (event.target.checked) {
+      const newFilterType = [...filterType];
+      newFilterType.push(event.target.name as Status);
+      setFilterType(newFilterType);
+    } else {
+      setFilterType(filterType.filter((item) => item !== event.target.name));
+    }
   };
 
   const clickHandler = () => {

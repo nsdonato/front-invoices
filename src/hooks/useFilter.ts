@@ -1,13 +1,10 @@
 import { useState } from "react";
+import { Status } from "../common";
 
 export const useFilter = () => {
   const [isOpen, setisOpen] = useState<boolean>(false);
 
-  const [filterType, setFilterType] = useState({
-    draft: false,
-    paid: false,
-    pending: false,
-  });
+  const [filterType, setFilterType] = useState<Status[]>([]);
 
   const filterView = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilterType({

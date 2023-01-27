@@ -1,17 +1,5 @@
 import { useEffect, useState } from "react";
-import { getDaysCalendar } from "./helpers/getDaysCalendar";
-
-// interface CalendarProps {
-//   theme: string;
-//   isDarkTheme: (theme: string) => boolean;
-//   date: Date;
-//   closeCalendar: () => void;
-//   handleClickDate: (day: number, month: number, year: number) => void;
-//   setMonthCounter: React.Dispatch<React.SetStateAction<number>>;
-//   monthCounter: number;
-//   yearCounter: number;
-//   setYearCounter: React.Dispatch<React.SetStateAction<number>>;
-// }
+import { useDaysCalendar } from "./helpers/useDaysCalendar";
 
 interface CalendarProps {
   closeCalendar: () => void;
@@ -29,36 +17,19 @@ export function Calendar({
 }: CalendarProps) {
   const dateFromInput = date;
   const [dateInCalendar, setDateInCalendar] = useState<Date>(dateFromInput);
-  const initialMonth = dateInCalendar.getMonth();
-  const initialYear = dateInCalendar.getFullYear();
-  const [monthCounter, setMonthCounter] = useState<number>(initialMonth);
-  const [yearCounter, setYearCounter] = useState<number>(initialYear);
-
-  const { totalDaysToRender, daysInMonth, year, nameMonth, month } =
-    getDaysCalendar({
-      dateToRenderInCalendar: dateInCalendar,
-    });
-
-  const handlePrevMonth = () => {
-    let newMonth: number = monthCounter;
-    if (monthCounter === 0) {
-      newMonth = 11;
-      setYearCounter(yearCounter - 1);
-    } else {
-      newMonth -= 1;
-    }
-    setMonthCounter(newMonth);
-  };
-  const handleNextMonth = () => {
-    let newMonth: number = monthCounter;
-    if (monthCounter === 11) {
-      newMonth = 0;
-      setYearCounter(yearCounter + 1);
-    } else {
-      newMonth += 1;
-    }
-    setMonthCounter(newMonth);
-  };
+  const {
+    handlePrevMonth,
+    handleNextMonth,
+    yearCounter,
+    monthCounter,
+    totalDaysToRender,
+    daysInMonth,
+    year,
+    nameMonth,
+    month,
+  } = useDaysCalendar({
+    dateToRenderInCalendar: dateInCalendar,
+  });
 
   useEffect(() => {
     const firstDayMonth = 1;

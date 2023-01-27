@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { months } from ".";
 
 interface dateToRenderInCalendarProp {
@@ -8,9 +9,35 @@ interface dateInNumbers {
   month: number;
   day: number;
 }
-export function getDaysCalendar({
+export function useDaysCalendar({
   dateToRenderInCalendar,
 }: dateToRenderInCalendarProp) {
+  const dateInCalendar = dateToRenderInCalendar;
+  const initialMonth = dateInCalendar.getMonth();
+  const initialYear = dateInCalendar.getFullYear();
+  const [monthCounter, setMonthCounter] = useState<number>(initialMonth);
+  const [yearCounter, setYearCounter] = useState<number>(initialYear);
+
+  const handlePrevMonth = () => {
+    let newMonth: number = monthCounter;
+    if (monthCounter === 0) {
+      newMonth = 11;
+      setYearCounter(yearCounter - 1);
+    } else {
+      newMonth -= 1;
+    }
+    setMonthCounter(newMonth);
+  };
+  const handleNextMonth = () => {
+    let newMonth: number = monthCounter;
+    if (monthCounter === 11) {
+      newMonth = 0;
+      setYearCounter(yearCounter + 1);
+    } else {
+      newMonth += 1;
+    }
+    setMonthCounter(newMonth);
+  };
   const getDateInNumbers = (date: Date): dateInNumbers => {
     const year = date.getFullYear();
     const month = date.getMonth();
@@ -43,6 +70,10 @@ export function getDaysCalendar({
   }
 
   return {
+    handlePrevMonth,
+    handleNextMonth,
+    yearCounter,
+    monthCounter,
     totalDaysToRender,
     daysInMonth,
     nameMonth: months[month],

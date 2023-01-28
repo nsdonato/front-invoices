@@ -1,7 +1,7 @@
 import { render } from "../utils/test-utils";
 import { SvgImg } from "../components/SvgImg/SvgImg";
 
-describe.only("SvgImg", () => {
+describe("SvgImg", () => {
   const src = "/public/assets/images/icon-arrow-up.svg";
   const alt = "testing-alt";
 

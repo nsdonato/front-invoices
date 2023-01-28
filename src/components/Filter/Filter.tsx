@@ -1,13 +1,7 @@
 import { SvgImg } from "../SvgImg/SvgImg";
-
 interface Props {
   isOpen: boolean;
   toggleOpen: () => void;
-  filtersType: {
-    draft: boolean;
-    paid: boolean;
-    pending: boolean;
-  };
   selectFilter: (event: React.ChangeEvent<HTMLInputElement>) => void;
   buttonText: string;
 }
@@ -15,7 +9,6 @@ interface Props {
 export const Filter = ({
   isOpen,
   toggleOpen,
-  filtersType,
   selectFilter,
   buttonText,
 }: Props) => {
@@ -43,8 +36,8 @@ export const Filter = ({
       </button>
       <div
         role="listbox"
-        className={` absolute  dark:text-brand-white dark:bg-brand-gray-muted -bottom-32 right-30 w-44  flex-col gap-1  rounded-lg p-4 box-border shadow-md 
-      ${isOpen ? "flex" : "hidden"}
+        className={` absolute z-20 bg-brand-bg dark:text-brand-white dark:bg-brand-gray-muted -bottom-32 right-30 w-44  flex-col gap-1  rounded-lg p-4 box-border shadow-md 
+      ${isOpen ? "flex" : "hidden"} 
       
       `}
       >

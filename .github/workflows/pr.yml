@@ -77,7 +77,7 @@ jobs:
           path: dist
       - name: 🧐 Unit testing
         run: npm run test
-  deploy-Preview:
+  Deploy-Preview:
     needs: [testing]
     runs-on: ubuntu-latest
     name: 🚀 Vercel Preview Deployment

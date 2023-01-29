@@ -1,8 +1,6 @@
-name: CI
+name: 🤖 Workflow for merges to main
 
 on:
-  pull_request:
-    branches: [main]
   push:
     branches: [main]
 
@@ -12,18 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ✋🏼 Cancel Previous Redundant Builds
-        uses: styfle/cancel-workflow-action@0.6.0
+        uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{ github.token }}
-  assign_pr_owner:
-    runs-on: ubuntu-latest
-    name: 📝 Assign PR to creator
-    steps:
-      - name: 📝 Assign PR to creator
-        uses: thomaseizinger/assign-pr-creator-action@v1.0.0
-        if: github.event_name == 'pull_request' && github.event.action == 'opened'
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
   lint:
     runs-on: ubuntu-latest
     name: 💅🏼 Linting
@@ -33,8 +22,8 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          node-version: 16
-          registry-url: 'https://registry.npmjs.org'
+          node-version: 18
+          registry-url: "https://registry.npmjs.org"
       - name: Install dependencies
         run: npm ci
       - name: 💅🏼 Linting
@@ -49,8 +38,8 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
-          node-version: 16
-          registry-url: 'https://registry.npmjs.org'
+          node-version: 18
+          registry-url: "https://registry.npmjs.org"
       - name: Install dependencies
         run: npm ci
       - name: 👷🏻‍♀️ Build
@@ -60,26 +49,26 @@ jobs:
           name: dist
           path: dist
   testing:
-      needs: [lint, build]
-      runs-on: ubuntu-latest
-      name: 🧐 Testing
-      steps:
-        - uses: actions/checkout@v2
-          with:
-            fetch-depth: 0
-        - uses: actions/setup-node@v2
-          with:
-            node-version: 16
-            registry-url: 'https://registry.npmjs.org'
-        - name: Install dependencies
-          run: npm ci
-        - uses: actions/download-artifact@v2
-          with:
-            name: dist
-            path: dist
-        - name: 🧐 Unit testing
-          run: npm run test
-  deploy:
+    needs: [lint, build]
+    runs-on: ubuntu-latest
+    name: 🧐 Testing
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 18
+          registry-url: "https://registry.npmjs.org"
+      - name: Install dependencies
+        run: npm ci
+      - uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: dist
+      - name: 🧐 Unit testing
+        run: npm run test
+  Deploy-Production:
     needs: [testing]
     runs-on: ubuntu-latest
     name: 🚀 Vercel Production Deployment
@@ -91,8 +80,8 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
       - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=production --token=${{ secrets.INVOICE_TOKEN }}
       - name: Build Project Artifacts
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel build --prod --token=${{ secrets.INVOICE_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.INVOICE_TOKEN }}

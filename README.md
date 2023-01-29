@@ -2,7 +2,7 @@
 
 👋🏻 Bienvenidx al Proyecto de [FrontEnd-Mentor](https://www.frontendmentor.io/challenges/invoice-app-i7KaLTQjl) desarrollado por la comunidad de Discord de [vamoacodear 👩🏻‍💻](https://www.twitch.tv/vamoacodear)
 
-## Descripción
+## Introducción
 
 Gracias al equipo de Diseño de Frontend Mentor 👀, tenemos un Design System que poner en marcha. Por lo que debemos tenerlo en cuenta en todo momento ya que debe respestarse.
 
@@ -18,7 +18,7 @@ En este [proyecto](https://www.frontendmentor.io/challenges/invoice-app-i7KaLTQj
 
 **Va a quedar expectacular en tu portfolio 🚀**
 
-## Objetivo del proyecto
+### Objetivo del proyecto
 
 Lo que intetamos hacer con este proyecto es **simular un espacio de trabajo**.
 Donde si bien no aplicamos al 100% metodologia Agile, ni marco Scrum, intentamos hacer lo posible considerando que es un grupo de trabajo interdiciplinario con diferentes usos horarios, que pueden tener o no experiencia en el mundo laboral.
@@ -26,9 +26,9 @@ Donde si bien no aplicamos al 100% metodologia Agile, ni marco Scrum, intentamos
 De esta manera aprenderas cosas del día a día de un equipo de trabajo, como:
 
 - Metodología Agile
-- Marco Scrum y sus ceremonias
+- Marco Scrum y sus ceremonias (planning, daily, review, retro) 
 - Crear Pull Request
-- Que te den revisen tu código mediante Code Review
+- Que te reavisen el código (Code Review)
 - A utilizar diferentes tecnologías que votamos para utilizar en el proyecto:
 
   <br/>
@@ -48,9 +48,6 @@ De esta manera aprenderas cosas del día a día de un equipo de trabajo, como:
   - GitHub Actions
   - Deploy con Vercel
 
-## Ayuda
-
-Si tienes cualquier duda puedes preguntar en nuestro [Discord](https://discord.io/vamoacodear) canal #🧾-invoices-app
 
 ## Extensiones
 
@@ -67,6 +64,7 @@ El proyecto ya tiene una versión de Node seteada en el archivo `.nvmrc`, por lo
 
 **Para instalarla:**
 Mac o Linux: https://github.com/nvm-sh/nvm (curl o wget)
+
 Windows: https://github.com/coreybutler/nvm-windows (instalador)
 
 Luego de eso utilizar el comando `nvm use`, esto verifica si hay un archivo en el proyecto llamado `.nvmrc` y si no estas usando de node correcta, la setea.
@@ -77,23 +75,28 @@ Luego de eso utilizar el comando `nvm use`, esto verifica si hay un archivo en e
 npm install
 ```
 
-### Ejecutar la aplicación
+#### Ejecutar la aplicación
 
 ```
 npm run dev
 ```
 
-### Ejecutar los test
+#### Ejecutar los test
 
 ```
 npm run test
 ```
+## Como contribuir
 
-### Info detallada del Design System: [link](DESING_SYSTEM.md)
+Queres aparecer entre los colaboradores? Te dejo el paso a paso con toda la info para poder colaborar en este [link](CONTRIBUTING.md)
+
+## Info detallada del Design System: [link](DESING_SYSTEM.md)
+
+## Ayuda
+
+Si tienes cualquier duda puedes preguntar en nuestro [Discord](https://discord.io/vamoacodear) canal #🧾-invoices-app
 
 ## Colaboradores
-
-Queres aparecer acá? Te dejo el [link](CONTRIBUTING.md) con toda la info para poder colaborar.
 
 <a href="https://github.com/nsdonato/front-invoices/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=nsdonato/front-invoices" />

@@ -1,10 +1,8 @@
 name: 🤖 Workflow for PRs
 
 on:
-  pull_request:
-    branches:
-      - "feature/**"
-      - "bugfix/**"
+  push:
+    branches: [main]
 
 jobs:
   check-skip:

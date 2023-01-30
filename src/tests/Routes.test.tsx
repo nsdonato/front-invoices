@@ -12,30 +12,16 @@ describe("App", () => {
     ];
     const router = createMemoryRouter(routes, {
       initialEntries: ["/"],
-      initialIndex: 1,
     });
 
     render(<RouterProvider router={router} />);
     const nav = screen.getByTestId("nav");
+    const emptyStateTitle = screen.getByText(/there is nothing here/i);
     expect(nav).toBeInTheDocument();
+    expect(emptyStateTitle).toBeInTheDocument();
   });
 
-  test.skip("should render the view home", () => {
-    const routes = [
-      {
-        path: "/",
-        element: <App />,
-      },
-    ];
-    const router = createMemoryRouter(routes, {
-      initialEntries: ["/"],
-    });
-
-    render(<RouterProvider router={router} />);
-    expect(screen.getByText(/invoice app/i)).toBeInTheDocument();
-  });
-
-  test.skip("should render the detail view invoice", () => {
+  test.todo("should render the detail view invoice", () => {
     const routes = [
       {
         path: "/invoice/:id/detail",
@@ -50,7 +36,7 @@ describe("App", () => {
     expect(screen.getByText(/detail view invoice/i)).toBeInTheDocument();
   });
 
-  test.skip("should render the detail view invoice", () => {
+  test.todo("should render the detail view invoice", () => {
     const routes = [
       {
         path: "/invoice/:id?",

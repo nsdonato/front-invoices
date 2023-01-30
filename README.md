@@ -14,7 +14,7 @@ En este [proyecto](https://www.frontendmentor.io/challenges/invoice-app-i7KaLTQj
 - Filtrar facturas por estado (borrador/pendiente/pagada)
 - Ver el diseño óptimo para la aplicación según el tamaño de pantalla de su dispositivo
 - Ver estados de desplazamiento para todos los elementos interactivos en la página
-- Alternar modo claro y oscuro
+- Alternar dark y light mode
 
 **Va a quedar expectacular en tu portfolio 🚀**
 
@@ -26,7 +26,7 @@ Donde si bien no aplicamos al 100% metodologia Agile, ni marco Scrum, intentamos
 De esta manera aprenderas cosas del día a día de un equipo de trabajo, como:
 
 - Metodología Agile
-- Marco Scrum y sus ceremonias (planning, daily, review, retro) 
+- Marco Scrum y sus ceremonias (planning, daily, review, retro)
 - Crear Pull Request
 - Que te reavisen el código (Code Review)
 - A utilizar diferentes tecnologías que votamos para utilizar en el proyecto:
@@ -47,7 +47,6 @@ De esta manera aprenderas cosas del día a día de un equipo de trabajo, como:
   - React Hook Form
   - GitHub Actions
   - Deploy con Vercel
-
 
 ## Extensiones
 
@@ -86,6 +85,7 @@ npm run dev
 ```
 npm run test
 ```
+
 ## Como contribuir
 
 Queres aparecer entre los colaboradores? Te dejo el paso a paso con toda la info para poder colaborar en este [link](CONTRIBUTING.md)

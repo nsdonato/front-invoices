@@ -1,6 +1,9 @@
 const NavBar = () => {
   return (
-    <nav className="flex items-center justify-between w-screen bg-brand-gray darkMode:bg-brand-gray-dark brand-lg:flex-col brand-lg:w-[103px] brand-lg:h-screen brand-lg:rounded-r-[20px] ">
+    <nav
+      data-testid="nav"
+      className="flex items-center justify-between w-screen bg-brand-gray darkMode:bg-brand-gray-dark brand-lg:flex-col brand-lg:w-[103px] brand-lg:h-screen brand-lg:rounded-r-[20px] "
+    >
       <span>
         <img
           src="/logo.svg"

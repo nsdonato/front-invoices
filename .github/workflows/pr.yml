@@ -1,4 +1,4 @@
-name: 🤖 Workflow for PRs
+name: 🤖 Workflow - Pull Request 🧐
 
 on:
   pull_request:

@@ -2,9 +2,9 @@ name: 🤖 Workflow for PRs
 
 on:
   pull_request:
-    branches:    
-      - 'feature/**'
-      - 'bugfix/**'
+    branches:
+      - "feature/**"
+      - "bugfix/**"
 
 jobs:
   check-skip:
@@ -26,7 +26,6 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
   lint:
-    needs: [add-reviews]
     runs-on: ubuntu-latest
     name: 💅🏼 Linting
     steps:

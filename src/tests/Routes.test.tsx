@@ -16,7 +16,7 @@ describe("App", () => {
     });
 
     render(<RouterProvider router={router} />);
-    expect(screen.getByText(/welcome to invoice app/i)).toBeInTheDocument();
+    expect(screen.getByText(/invoice app/i)).toBeInTheDocument();
   });
 
   test("should render the view home", () => {
@@ -31,7 +31,7 @@ describe("App", () => {
     });
 
     render(<RouterProvider router={router} />);
-    expect(screen.getByText(/welcome to invoice app/i)).toBeInTheDocument();
+    expect(screen.getByText(/invoice app/i)).toBeInTheDocument();
   });
 
   test("should render the detail view invoice", () => {

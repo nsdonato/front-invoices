@@ -15,7 +15,7 @@ jobs:
         uses: styfle/cancel-workflow-action@0.9.1
         with:
           access_token: ${{ github.token }}
-  add-reviews:
+  auto-assign:
     name: "🤓 Auto Assign"
     runs-on: ubuntu-latest
     steps:

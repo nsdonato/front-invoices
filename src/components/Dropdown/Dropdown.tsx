@@ -44,7 +44,7 @@ function Dropdown() {
       className={`relative max-w-[327px] lg:w-60 md:w-60 mx-auto text-sm font-bold rounded border cursor-pointer transition border-brand-violet-highlight dark:text-brand-white dark:bg-brand-gray-dark dark:border-brand-gray-muted hover:border-brand-violet`}
     >
       <p className="pl-5 pr-4 py-2 select-none">
-        Net {paymentTerm} {paymentTerm === 1 ? "day" : "days"}
+        Net {paymentTerm} {paymentTerm === 1 ? "Day" : "Days"}
       </p>
       <DropdownArrow />
       <div
@@ -63,7 +63,7 @@ function Dropdown() {
                 className={`pl-5 pr-4 py-2 last:border-b-0 dark:border-b-brand-gray-muted border-b-[1px] hover:text-brand-violet `}
                 key={option}
               >
-                Net {option} {option === 1 ? "day" : "days"}
+                Net {option} {option === 1 ? "Day" : "Days"}
               </li>
             );
           })}

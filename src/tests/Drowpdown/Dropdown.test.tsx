@@ -11,16 +11,16 @@ test("renders Dropdown component correctly", () => {
 test("all values are in dropdown", () => {
   render(<Dropdown />);
   const dropdownElement = screen.getByTestId("term-list");
-  expect(dropdownElement).toHaveTextContent("Net 1 day");
-  expect(dropdownElement).toHaveTextContent("Net 7 days");
-  expect(dropdownElement).toHaveTextContent("Net 14 days");
-  expect(dropdownElement).toHaveTextContent("Net 30 days");
+  expect(dropdownElement).toHaveTextContent(/Net 1 day/i);
+  expect(dropdownElement).toHaveTextContent(/Net 7 days/i);
+  expect(dropdownElement).toHaveTextContent(/Net 14 days/i);
+  expect(dropdownElement).toHaveTextContent(/Net 30 days/i);
 });
 
 test("verify dropdown default value is 30 days", () => {
   render(<Dropdown />);
   const dropdownElement = screen.getByTestId("dropdown");
-  expect(dropdownElement.children[0]).toHaveTextContent("Net 30 days");
+  expect(dropdownElement.children[0]).toHaveTextContent(/Net 30 days/i);
 });
 
 test("dropdown has 4 options", () => {

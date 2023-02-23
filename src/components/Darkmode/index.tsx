@@ -5,7 +5,7 @@ function DarkMode() {
   const isLight = theme === "light";
 
   return (
-    <button onClick={handleTheme}>
+    <button className="p-2" onClick={handleTheme}>
       <img
         src={isLight ? "/sun.svg" : "/moon.svg"}
         alt={isLight ? "Light theme icon" : "Dark theme icon"}

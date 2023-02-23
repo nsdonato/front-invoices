@@ -1,3 +1,5 @@
+import DarkMode from "../Darkmode";
+
 const NavBar = () => {
   return (
     <nav
@@ -12,6 +14,7 @@ const NavBar = () => {
         />
       </span>
       <div className="border-brand-gray-light px-[24px] py-[20px] border-l-[1px] md:py-[24px] md:px-[31px] md:border-0 md:border-t-[1px]">
+        <DarkMode />
         <span className="flex md:w-[40px] md:h-[40px] w-[32px] h-[32px] p-1.5 overflow-hidden bg-gray-200 rounded-full ">
           <img src="/avatar.svg" alt="avatar-skeleton" />
         </span>
